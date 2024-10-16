@@ -31,6 +31,12 @@ class Forest {
     getCellNumberByCoord(x, y) {
         return x + y * this.width;
     }
+    
+    startFire(x, y) {
+      if (this.forestTab[this.getCellNumberByCoord(x, y)] === forestCell.tree) {
+        this.forestTab[this.getCellNumberByCoord(x, y)] = forestCell.fire;
+      }
+    }
 
     startRandomFire() {
         let allume = false;
@@ -103,6 +109,7 @@ class Forest {
           return false;
         }
     }
+    
     play() {
         if (this.propagation()) {
           sleep(500).then(() => {
@@ -113,11 +120,6 @@ class Forest {
         }
     }
 
-    startFire(x, y) {
-        if (this.forestTab[this.getCellNumberByCoord(x, y)] === forestCell.tree) {
-          this.forestTab[this.getCellNumberByCoord(x, y)] = forestCell.fire;
-        }
-    }
     display() {
         forestContainer.innerHTML = "";
         for (let i = 0; i < this.width * this.height; i++) {
